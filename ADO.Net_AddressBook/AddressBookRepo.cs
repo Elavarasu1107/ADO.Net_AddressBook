@@ -89,5 +89,35 @@ namespace ADO.Net_AddressBook
                 }
             }
         }
+        public void UpdateTable()
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+            try
+            {
+                using (connection)
+                {
+                    Console.WriteLine("Enter ID");
+                    int id = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Enter an Address to Update");
+                    string address = Console.ReadLine();
+                    SqlCommand command = new SqlCommand("UpdateTable", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@ADDRESS", address);
+                    command.Parameters.AddWithValue("@ID", id);
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                    Console.WriteLine("Data Updated Successfully");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
     }
 }
