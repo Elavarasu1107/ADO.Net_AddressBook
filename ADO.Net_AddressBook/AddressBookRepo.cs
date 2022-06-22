@@ -119,5 +119,32 @@ namespace ADO.Net_AddressBook
                 connection.Close();
             }
         }
+        public void DeleteData()
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+            try
+            {
+                using (connection)
+                {
+                    Console.WriteLine("Enter ID");
+                    int id = Convert.ToInt32(Console.ReadLine());
+                    SqlCommand command = new SqlCommand("DeleteData", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@ID", id);
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                    Console.WriteLine("Data Deleted Successfully");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
     }
 }
