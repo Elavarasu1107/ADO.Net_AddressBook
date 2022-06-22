@@ -45,5 +45,49 @@ namespace ADO.Net_AddressBook
                 }
             }
         }
+        public void ReadData()
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+            using (connection)
+            {
+                AddressBook_Model model = new AddressBook_Model();
+                try
+                {
+                    string query = "SELECT * FROM ADDRESS_BOOK";
+                    SqlCommand command = new SqlCommand(query, connection);
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            model.id = reader.GetInt32(0);
+                            model.firstName = reader.GetString(1);
+                            model.lastName = reader.GetString(2);
+                            model.address = reader.GetString(3);
+                            model.city = reader.GetString(4);
+                            model.state = reader.GetString(5);
+                            model.zipCode = reader.GetDouble(6);
+                            model.phone = reader.GetDouble(7);
+                            model.email = reader.GetString(8);
+                            model.type = reader.GetString(9);
+
+                            Console.WriteLine("ID: " + model.id + "\nFirst Name: " + model.firstName + "\nLast Name: " + model.lastName +
+                                "\nAddress" + model.address + "\nCity: " + model.city + "\nState:" + model.state + "\nZip Code: " + model.zipCode
+                                + "\nPhone: " + model.phone + "\nEmail: " + model.email + "\nType: " + model.type + "\n");
+                        }
+                    }
+                    connection.Close();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+        }
     }
 }
