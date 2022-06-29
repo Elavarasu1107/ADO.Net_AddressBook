@@ -15,33 +15,36 @@ namespace ADO.Net_AddressBook
         public void AddData(AddressBook_Model model)
         {
             SqlConnection connection = new SqlConnection(connectionString);
-            using(connection)
+            lock(this)
             {
-                try
+                using (connection)
                 {
-                    SqlCommand command = new SqlCommand("AddContacts", connection);
-                    command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@FIRST_NAME", model.firstName);
-                    command.Parameters.AddWithValue("@LAST_NAME", model.lastName);
-                    command.Parameters.AddWithValue("@ADDRESS", model.address);
-                    command.Parameters.AddWithValue("@CITY", model.city);
-                    command.Parameters.AddWithValue("@STATE", model.state);
-                    command.Parameters.AddWithValue("@ZIP_CODE", model.zipCode);
-                    command.Parameters.AddWithValue("@PHONE_NUMBER", model.phone);
-                    command.Parameters.AddWithValue("@EMAIL", model.email);
-                    command.Parameters.AddWithValue("@TYPE", model.type);
-                    connection.Open();
-                    var result = command.ExecuteNonQuery();
-                    connection.Close();
-                    Console.WriteLine("Data Added Successfully");
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception(ex.Message);
-                }
-                finally
-                {
-                    connection.Close();
+                    try
+                    {
+                        SqlCommand command = new SqlCommand("AddContacts", connection);
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@FIRST_NAME", model.firstName);
+                        command.Parameters.AddWithValue("@LAST_NAME", model.lastName);
+                        command.Parameters.AddWithValue("@ADDRESS", model.address);
+                        command.Parameters.AddWithValue("@CITY", model.city);
+                        command.Parameters.AddWithValue("@STATE", model.state);
+                        command.Parameters.AddWithValue("@ZIP_CODE", model.zipCode);
+                        command.Parameters.AddWithValue("@PHONE_NUMBER", model.phone);
+                        command.Parameters.AddWithValue("@EMAIL", model.email);
+                        command.Parameters.AddWithValue("@TYPE", model.type);
+                        connection.Open();
+                        var result = command.ExecuteNonQuery();
+                        connection.Close();
+                        Console.WriteLine("Data Added Successfully");
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception(ex.Message);
+                    }
+                    finally
+                    {
+                        connection.Close();
+                    }
                 }
             }
         }
@@ -145,6 +148,20 @@ namespace ADO.Net_AddressBook
             {
                 connection.Close();
             }
+        }
+        public void AddMultipleContacts(List<AddressBook_Model> data)
+        {
+            data.ForEach(details =>
+            {
+                Thread thread = new Thread(() =>
+                {
+                    Console.WriteLine("Thread Start Time: " + DateTime.Now);
+                    this.AddData(details);
+                    Console.WriteLine("Contact Added: " + details.firstName);
+                    Console.WriteLine("Thread End Time: " + DateTime.Now);
+                });
+                thread.Start();
+            });
         }
     }
 }

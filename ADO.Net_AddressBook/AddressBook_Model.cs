@@ -18,5 +18,6 @@ namespace ADO.Net_AddressBook
         public double phone { get; set; }
         public string email { get; set; }
         public string type { get; set; }
+        
     }
 }
