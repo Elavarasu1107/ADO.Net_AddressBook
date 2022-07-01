@@ -87,5 +87,14 @@ namespace RestSharp_Address
             Assert.AreEqual(1234567890, data.phone);
             Console.WriteLine(response.Content);
         }
+        [TestMethod]
+        public void OnDeleteCall_ShouldDeleteDataOnJsonServer()
+        {
+            client = new RestClient("http://localhost:5000");
+            RestRequest request = new RestRequest("/friends/3", Method.Delete);
+            RestResponse response = client.Execute(request);
+            Assert.AreEqual(response.StatusCode, HttpStatusCode.OK);
+            Console.WriteLine(response.Content);
+        }
     }
 }
