@@ -1,0 +1,12 @@
+{
+  "/family/list": "/family",
+  "/family/get/:id": "/family/:id",
+  "/family/create": "/family",
+  "/family/update/:id": "/family/:id",
+  "/family/delete/:id": "/family/:id",
+  "/friends/list": "/friends",
+  "/friends/get/:id": "/friends/:id",
+  "/friends/create": "/friends",
+  "/friends/update/:id": "/friends/:id",
+  "/friends/delete/:id": "/friends/:id"
+}

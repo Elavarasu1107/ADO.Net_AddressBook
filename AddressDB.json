@@ -1,0 +1,76 @@
+{
+  "family": [
+    {
+      "id": 1,
+      "firstName": "Elavarasu",
+      "lastName": "Appusamy",
+      "address": "11A",
+      "city": "Salem",
+      "state": "Tamil Nadu",
+      "zipCode": "654321",
+      "phone": "9807654321",
+      "email": "elavarasu@gamil.com"
+    },
+    {
+      "id": 2,
+      "firstName": "Sudha",
+      "lastName": "Shanmugam",
+      "address": "13C",
+      "city": "Namakkal",
+      "state": "Tamil Nadu",
+      "zipCode": 654321,
+      "phone": 8970645231,
+      "email": "sudha@gmail.com",
+      "type": null
+    },
+    {
+      "id": 3,
+      "firstName": "Appu",
+      "lastName": "Samy",
+      "address": "11A",
+      "city": "Komarapalayam",
+      "state": "Tamil Nadu",
+      "zipCode": 654321,
+      "phone": 7890654321,
+      "email": "appu@gmail.com",
+      "type": null
+    },
+    {
+      "id": 4,
+      "firstName": "Sarasu",
+      "lastName": "Mani",
+      "address": "11A",
+      "city": "Komarapalayam",
+      "state": "Tamil Nadu",
+      "zipCode": 654321,
+      "phone": 6789045123,
+      "email": "sarasu@gmail.com",
+      "type": null
+    }
+  ],
+  "friends": [
+    {
+      "id": 1,
+      "firstName": "Nantha",
+      "lastName": "Gopal",
+      "address": "12B",
+      "city": "Coimbatore",
+      "state": "Tamil Nadu",
+      "zipCode": "645321",
+      "phone": "8907654321",
+      "email": "nantha@gamil.com"
+    },
+    {
+      "id": 2,
+      "firstName": "Sentil",
+      "lastName": "Kumar",
+      "address": "13A",
+      "city": "Dindigul",
+      "state": "Tamil Nadu",
+      "zipCode": 654321,
+      "phone": 7890654321,
+      "email": "senthil@gmail.com",
+      "type": null
+    }
+  ]
+}
